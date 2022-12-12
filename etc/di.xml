@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+        xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Tunt\CustomLoger\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <virtualType name="Tunt\CustomLoger\Logger\Logger" type="Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">CustomLogerger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Tunt\CustomLoger\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Tunt\CustomLoger\Controller\Index\Index">
+        <arguments>
+            <argument name="logger" xsi:type="object">Tunt\CustomLoger\Logger\Logger</argument>
+        </arguments>
+    </type>
+</config>
